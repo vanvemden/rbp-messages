@@ -15,45 +15,117 @@
  *    }
  */
 
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import {
+  GET_MESSAGES,
+  GET_MESSAGES_SUCCESS,
+  GET_MESSAGES_ERROR,
+  POST_MESSAGE,
+  POST_MESSAGE_SUCCESS,
+  POST_MESSAGE_ERROR,
+  PATCH_MESSAGE,
+  PATCH_MESSAGE_SUCCESS,
+  PATCH_MESSAGE_ERROR,
+  DELETE_MESSAGE,
+  DELETE_MESSAGE_SUCCESS,
+  DELETE_MESSAGE_ERROR,
+} from './constants';
 
 /**
- * Load the repositories, this action starts the request saga
- *
- * @return {object} An action object with a type of LOAD_REPOS
+ * Get the messages, this action starts the request saga. Saga will dispatch:
+ * - on success, getMessagesSuccess(messages)
+ * - on error, getMessagesError(error)
  */
-export function loadRepos() {
+export function getMessages() {
   return {
-    type: LOAD_REPOS,
+    type: GET_MESSAGES,
+  };
+}
+
+export function getMessagesSuccess(messages) {
+  return {
+    type: GET_MESSAGES_SUCCESS,
+    messages,
+  };
+}
+
+export function getMessagesError(error) {
+  return {
+    type: GET_MESSAGES_ERROR,
+    error,
   };
 }
 
 /**
- * Dispatched when the repositories are loaded by the request saga
- *
- * @param  {array} repos The repository data
- * @param  {string} username The current username
- *
- * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
+ * Post a message, this action starts the request saga. Saga will dispatch:
+ * - on success, postMessageSuccess(message)
+ * - on error, postMessageError(error)
  */
-export function reposLoaded(repos, username) {
+export function postMessage() {
   return {
-    type: LOAD_REPOS_SUCCESS,
-    repos,
-    username,
+    type: POST_MESSAGE,
+  };
+}
+
+export function postMessageSuccess(message) {
+  return {
+    type: POST_MESSAGE_SUCCESS,
+    message,
+  };
+}
+
+export function postMessageError(error) {
+  return {
+    type: POST_MESSAGE_ERROR,
+    error,
   };
 }
 
 /**
- * Dispatched when loading the repositories fails
- *
- * @param  {object} error The error
- *
- * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
+ * Patch a message, this action starts the request saga. Saga will dispatch:
+ * - on success, patchMessageSuccess(message)
+ * - on error, patchMessageError(error)
  */
-export function repoLoadingError(error) {
+export function patchMessage() {
   return {
-    type: LOAD_REPOS_ERROR,
+    type: PATCH_MESSAGE,
+  };
+}
+
+export function patchMessageSuccess(message) {
+  return {
+    type: PATCH_MESSAGE_SUCCESS,
+    message,
+  };
+}
+
+export function patchMessageError(error) {
+  return {
+    type: PATCH_MESSAGE_ERROR,
+    error,
+  };
+}
+
+/**
+ * Delete a message, this action starts the request saga. Saga will dispatch:
+ * - on success, deleteMessageSuccess(id)
+ * - on error, deleteMessageError(error)
+ */
+export function deleteMessage() {
+  return {
+    type: DELETE_MESSAGE,
+  };
+}
+
+export function deleteMessageSuccess(id) {
+  return {
+    type: DELETE_MESSAGE_SUCCESS,
+    id,
+  };
+}
+
+export function deleteMessageError(error) {
+  return {
+    type: DELETE_MESSAGE_ERROR,
     error,
   };
 }
