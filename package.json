@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
+    "@bootstrap-styled/v4": "^3.4.0",
     "bootstrap-styled": "^2.7.2",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
