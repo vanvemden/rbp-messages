@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
-import MessageListItem from 'containers/MessageListItem';
+import PostListItem from 'containers/PostListItem';
 
-function MessagesList({ loading, storing, error, messages }) {
+function PostsList({ loading, storing, error, posts }) {
   if (loading || storing) {
     return <List component={LoadingIndicator} />;
   }
@@ -18,18 +18,18 @@ function MessagesList({ loading, storing, error, messages }) {
     return <List component={ErrorComponent} />;
   }
 
-  if (messages !== false) {
-    return <List items={messages} component={MessageListItem} />;
+  if (posts !== false) {
+    return <List items={posts} component={PostListItem} />;
   }
 
   return null;
 }
 
-MessagesList.propTypes = {
+PostsList.propTypes = {
   loading: PropTypes.bool,
   storing: PropTypes.bool,
   error: PropTypes.any,
-  messages: PropTypes.any,
+  posts: PropTypes.any,
 };
 
-export default MessagesList;
+export default PostsList;

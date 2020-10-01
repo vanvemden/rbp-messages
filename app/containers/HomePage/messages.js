@@ -10,22 +10,14 @@ export const scope = 'rbp-messages.containers.HomePage';
 export default defineMessages({
   startProjectHeader: {
     id: `${scope}.start_project.header`,
-    defaultMessage: 'vent<strong>rad.io</vent>',
+    defaultMessage: 'site name',
   },
   startProjectMessage: {
     id: `${scope}.start_project.message`,
-    defaultMessage: 'Vent your emotions',
+    defaultMessage: 'catchy slogan goes here',
   },
-  trymeHeader: {
-    id: `${scope}.tryme.header`,
-    defaultMessage: 'Try me!',
-  },
-  trymeMessage: {
-    id: `${scope}.tryme.message`,
-    defaultMessage: 'Show Github repositories by',
-  },
-  trymeAtPrefix: {
-    id: `${scope}.tryme.atPrefix`,
-    defaultMessage: '@',
+  messagesHeader: {
+    id: `${scope}.messages.header`,
+    defaultMessage: 'Posts',
   },
 });

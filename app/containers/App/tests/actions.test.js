@@ -1,187 +1,187 @@
 import {
-  GET_MESSAGES,
-  GET_MESSAGES_SUCCESS,
-  GET_MESSAGES_ERROR,
-  POST_MESSAGE,
-  POST_MESSAGE_SUCCESS,
-  POST_MESSAGE_ERROR,
-  PATCH_MESSAGE,
-  PATCH_MESSAGE_SUCCESS,
-  PATCH_MESSAGE_ERROR,
-  DELETE_MESSAGE,
-  DELETE_MESSAGE_SUCCESS,
-  DELETE_MESSAGE_ERROR,
+  GET_POSTS,
+  GET_POSTS_SUCCESS,
+  GET_POSTS_ERROR,
+  POST_POST,
+  POST_POST_SUCCESS,
+  POST_POST_ERROR,
+  PATCH_POST,
+  PATCH_POST_SUCCESS,
+  PATCH_POST_ERROR,
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
 } from '../constants';
 
 import {
-  getMessages,
-  getMessagesSuccess,
-  getMessagesError,
-  postMessage,
-  postMessageSuccess,
-  postMessageError,
-  patchMessage,
-  patchMessageSuccess,
-  patchMessageError,
-  deleteMessage,
-  deleteMessageSuccess,
-  deleteMessageError,
+  getPosts,
+  getPostsSuccess,
+  getPostsError,
+  postPost,
+  postPostSuccess,
+  postPostError,
+  patchPost,
+  patchPostSuccess,
+  patchPostError,
+  deletePost,
+  deletePostSuccess,
+  deletePostError,
 } from '../actions';
 
 describe('App GET Actions', () => {
-  describe('getMessages', () => {
+  describe('getPosts', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: GET_MESSAGES,
+        type: GET_POSTS,
       };
 
-      expect(getMessages()).toEqual(expectedResult);
+      expect(getPosts()).toEqual(expectedResult);
     });
   });
 
-  describe('getMessagesSuccess', () => {
-    it('should return the correct type and the passed messages', () => {
+  describe('getPostsSuccess', () => {
+    it('should return the correct type and the passed Posts', () => {
       const fixture = ['Test'];
       const expectedResult = {
-        type: GET_MESSAGES_SUCCESS,
-        messages: fixture,
+        type: GET_POSTS_SUCCESS,
+        posts: fixture,
       };
 
-      expect(getMessagesSuccess(fixture)).toEqual(expectedResult);
+      expect(getPostsSuccess(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('getMessagesError', () => {
+  describe('getPostsError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: GET_MESSAGES_ERROR,
+        type: GET_POSTS_ERROR,
         error: fixture,
       };
 
-      expect(getMessagesError(fixture)).toEqual(expectedResult);
+      expect(getPostsError(fixture)).toEqual(expectedResult);
     });
   });
 });
 
 describe('App POST Actions', () => {
-  describe('postMessage', () => {
+  describe('postPost', () => {
     it('should return the correct type', () => {
       const fixture = { text: 'Hello World!' };
       const expectedResult = {
-        type: POST_MESSAGE,
-        message: fixture,
+        type: POST_POST,
+        post: fixture,
       };
 
-      expect(postMessage(fixture)).toEqual(expectedResult);
+      expect(postPost(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('postMessageSuccess', () => {
-    it('should return the correct type and the passed message', () => {
+  describe('postPostSuccess', () => {
+    it('should return the correct type and the passed Post', () => {
       const fixture = { id: 1, text: 'Hello World!' };
       const expectedResult = {
-        type: POST_MESSAGE_SUCCESS,
-        message: fixture,
+        type: POST_POST_SUCCESS,
+        post: fixture,
       };
 
-      expect(postMessageSuccess(fixture)).toEqual(expectedResult);
+      expect(postPostSuccess(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('postMessageError', () => {
+  describe('postPostError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: POST_MESSAGE_ERROR,
+        type: POST_POST_ERROR,
         error: fixture,
       };
 
-      expect(postMessageError(fixture)).toEqual(expectedResult);
+      expect(postPostError(fixture)).toEqual(expectedResult);
     });
   });
 });
 
 describe('App PATCH Actions', () => {
-  describe('patchMessage', () => {
+  describe('patchPost', () => {
     it('should return the correct type', () => {
       const fixture = { id: 1, text: 'Hello New World!' };
       const expectedResult = {
-        type: PATCH_MESSAGE,
-        message: fixture,
+        type: PATCH_POST,
+        post: fixture,
       };
 
-      expect(patchMessage(fixture)).toEqual(expectedResult);
+      expect(patchPost(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('patchMessageSuccess', () => {
-    it('should return the correct type and the passed message', () => {
+  describe('patchPostSuccess', () => {
+    it('should return the correct type and the passed Post', () => {
       const fixture = { id: 1, text: 'Hello New World!' };
       const expectedResult = {
-        type: PATCH_MESSAGE_SUCCESS,
-        messages: fixture,
+        type: PATCH_POST_SUCCESS,
+        post: fixture,
       };
 
-      expect(patchMessageSuccess(fixture)).toEqual(expectedResult);
+      expect(patchPostSuccess(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('patchMessageError', () => {
+  describe('patchPostError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: PATCH_MESSAGE_ERROR,
+        type: PATCH_POST_ERROR,
         error: fixture,
       };
 
-      expect(patchMessageError(fixture)).toEqual(expectedResult);
+      expect(patchPostError(fixture)).toEqual(expectedResult);
     });
   });
 });
 
 describe('App DELETE Actions', () => {
-  describe('deleteMessage', () => {
+  describe('deletePost', () => {
     it('should return the correct type', () => {
       const fixture = 1;
       const expectedResult = {
-        type: DELETE_MESSAGE,
+        type: DELETE_POST,
         id: fixture,
       };
 
-      expect(deleteMessage(fixture)).toEqual(expectedResult);
+      expect(deletePost(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('deleteMessageSuccess', () => {
-    it('should return the correct type and the passed message', () => {
+  describe('deletePostSuccess', () => {
+    it('should return the correct type and the passed Post', () => {
       const fixture = 1;
       const expectedResult = {
-        type: DELETE_MESSAGE_SUCCESS,
-        messages: fixture,
+        type: DELETE_POST_SUCCESS,
+        post: fixture,
       };
 
-      expect(deleteMessageSuccess(fixture)).toEqual(expectedResult);
+      expect(deletePostSuccess(fixture)).toEqual(expectedResult);
     });
   });
 
-  describe('deleteMessageError', () => {
+  describe('deletePostError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: DELETE_MESSAGE_ERROR,
+        type: DELETE_POST_ERROR,
         error: fixture,
       };
 
-      expect(deleteMessageError(fixture)).toEqual(expectedResult);
+      expect(deletePostError(fixture)).toEqual(expectedResult);
     });
   });
 });

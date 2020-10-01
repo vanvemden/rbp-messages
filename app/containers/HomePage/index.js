@@ -9,57 +9,57 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  makeSelectMessages,
+  makeSelectPosts,
   makeSelectLoading,
   makeSelectStoring,
   makeSelectError,
 } from 'containers/App/selectors';
 
-import { Jumbotron, Container, H2 } from '@bootstrap-styled/v4';
-import MessagesList from 'components/MessagesList';
-import uiText from './messages';
-import { getMessages } from '../App/actions';
+import { Container, H2 } from '@bootstrap-styled/v4';
+import CenteredJumbotron from 'components/CenteredJumbotron';
+import PostsList from 'components/PostsList';
+import messages from './messages';
+import { getPosts } from '../App/actions';
 import saga from './saga';
 
 const key = 'home';
 
-export function HomePage({ loading, storing, error, messages, onPageLoad }) {
+export function HomePage({ loading, storing, error, posts, onPageLoad }) {
   useInjectSaga({ key, saga });
 
   useEffect(() => {
     onPageLoad();
   }, []);
 
-  const propsMessagesList = {
+  const propsPostsList = {
     loading,
     storing,
     error,
-    messages,
+    posts,
   };
 
   return (
     <article>
       <Helmet>
-        <title>ventrad.io | vent your emotions</title>
-        <meta name="description" content="Vent your emotions." />
+        <title>site name | catchy slogan</title>
+        <meta name="description" content="Short website description." />
       </Helmet>
       <div>
-        <Jumbotron>
+        <CenteredJumbotron>
           <H2>
-            <FormattedHTMLMessage {...uiText.startProjectHeader} />
+            <FormattedHTMLMessage {...messages.startProjectHeader} />
           </H2>
           <p>
-            <FormattedMessage {...uiText.startProjectMessage} />
+            <FormattedMessage {...messages.startProjectMessage} />
           </p>
-        </Jumbotron>
+        </CenteredJumbotron>
         <Container>
           <H2>
-            <FormattedMessage {...uiText.trymeHeader} />
+            <FormattedMessage {...messages.messagesHeader} />
           </H2>
-          <MessagesList {...propsMessagesList} />
+          <PostsList {...propsPostsList} />
         </Container>
       </div>
     </article>
@@ -70,7 +70,7 @@ HomePage.propTypes = {
   loading: PropTypes.bool,
   storing: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  messages: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  posts: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onPageLoad: PropTypes.func,
 };
 
@@ -79,13 +79,13 @@ const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   storing: makeSelectStoring(),
   error: makeSelectError(),
-  messages: makeSelectMessages(),
+  posts: makeSelectPosts(),
 });
 
 // object to connect Redux actions to React component props
 export function mapDispatchToProps(dispatch) {
   return {
-    onPageLoad: () => dispatch(getMessages()),
+    onPageLoad: () => dispatch(getPosts()),
   };
 }
 // connect Redux state and actions to React component props

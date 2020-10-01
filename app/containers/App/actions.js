@@ -16,119 +16,119 @@
  */
 
 import {
-  GET_MESSAGES,
-  GET_MESSAGES_SUCCESS,
-  GET_MESSAGES_ERROR,
-  POST_MESSAGE,
-  POST_MESSAGE_SUCCESS,
-  POST_MESSAGE_ERROR,
-  PATCH_MESSAGE,
-  PATCH_MESSAGE_SUCCESS,
-  PATCH_MESSAGE_ERROR,
-  DELETE_MESSAGE,
-  DELETE_MESSAGE_SUCCESS,
-  DELETE_MESSAGE_ERROR,
+  GET_POSTS,
+  GET_POSTS_SUCCESS,
+  GET_POSTS_ERROR,
+  POST_POST,
+  POST_POST_SUCCESS,
+  POST_POST_ERROR,
+  PATCH_POST,
+  PATCH_POST_SUCCESS,
+  PATCH_POST_ERROR,
+  DELETE_POST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
 } from './constants';
 
 /**
- * Get the messages, this action starts the request saga. Saga will dispatch:
- * - on success, getMessagesSuccess(messages)
- * - on error, getMessagesError(error)
+ * Get the posts, this action starts the request saga. Saga will dispatch:
+ * - on success, getPostsSuccess(posts)
+ * - on error, getPostsError(error)
  */
-export function getMessages() {
+export function getPosts() {
   return {
-    type: GET_MESSAGES,
+    type: GET_POSTS,
   };
 }
 
-export function getMessagesSuccess(messages) {
+export function getPostsSuccess(posts) {
   return {
-    type: GET_MESSAGES_SUCCESS,
-    messages,
+    type: GET_POSTS_SUCCESS,
+    posts,
   };
 }
 
-export function getMessagesError(error) {
+export function getPostsError(error) {
   return {
-    type: GET_MESSAGES_ERROR,
+    type: GET_POSTS_ERROR,
     error,
   };
 }
 
 /**
- * Post a message, this action starts the request saga. Saga will dispatch:
- * - on success, postMessageSuccess(message)
- * - on error, postMessageError(error)
+ * Post a post, this action starts the request saga. Saga will dispatch:
+ * - on success, postPostSuccess(post)
+ * - on error, postPostError(error)
  */
-export function postMessage(message) {
+export function postPost(post) {
   return {
-    type: POST_MESSAGE,
-    message,
+    type: POST_POST,
+    post,
   };
 }
 
-export function postMessageSuccess(message) {
+export function postPostSuccess(post) {
   return {
-    type: POST_MESSAGE_SUCCESS,
-    message,
+    type: POST_POST_SUCCESS,
+    post,
   };
 }
 
-export function postMessageError(error) {
+export function postPostError(error) {
   return {
-    type: POST_MESSAGE_ERROR,
+    type: POST_POST_ERROR,
     error,
   };
 }
 
 /**
- * Patch a message, this action starts the request saga. Saga will dispatch:
- * - on success, patchMessageSuccess(message)
- * - on error, patchMessageError(error)
+ * Patch a post, this action starts the request saga. Saga will dispatch:
+ * - on success, patchPostSuccess(post)
+ * - on error, patchPostError(error)
  */
-export function patchMessage(message) {
+export function patchPost(post) {
   return {
-    type: PATCH_MESSAGE,
-    message,
+    type: PATCH_POST,
+    post,
   };
 }
 
-export function patchMessageSuccess(message) {
+export function patchPostSuccess(post) {
   return {
-    type: PATCH_MESSAGE_SUCCESS,
-    message,
+    type: PATCH_POST_SUCCESS,
+    post,
   };
 }
 
-export function patchMessageError(error) {
+export function patchPostError(error) {
   return {
-    type: PATCH_MESSAGE_ERROR,
+    type: PATCH_POST_ERROR,
     error,
   };
 }
 
 /**
- * Delete a message, this action starts the request saga. Saga will dispatch:
- * - on success, deleteMessageSuccess(id)
- * - on error, deleteMessageError(error)
+ * Delete a post, this action starts the request saga. Saga will dispatch:
+ * - on success, deletePostSuccess(id)
+ * - on error, deletePostError(error)
  */
-export function deleteMessage(id) {
+export function deletePost(id) {
   return {
-    type: DELETE_MESSAGE,
+    type: DELETE_POST,
     id,
   };
 }
 
-export function deleteMessageSuccess(id) {
+export function deletePostSuccess(id) {
   return {
-    type: DELETE_MESSAGE_SUCCESS,
+    type: DELETE_POST_SUCCESS,
     id,
   };
 }
 
-export function deleteMessageError(error) {
+export function deletePostError(error) {
   return {
-    type: DELETE_MESSAGE_ERROR,
+    type: DELETE_POST_ERROR,
     error,
   };
 }

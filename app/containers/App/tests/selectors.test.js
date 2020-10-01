@@ -3,7 +3,7 @@ import {
   makeSelectLoading,
   makeSelectStoring,
   makeSelectError,
-  makeSelectMessages,
+  makeSelectPosts,
   makeSelectLocation,
 } from '../selectors';
 
@@ -56,16 +56,16 @@ describe('makeSelectError', () => {
   });
 });
 
-describe('makeSelectMessages', () => {
-  const messagesSelector = makeSelectMessages();
+describe('makeSelectPosts', () => {
+  const messagesSelector = makeSelectPosts();
   it('should select the messages', () => {
-    const messages = [];
+    const posts = [];
     const mockedState = {
       global: {
-        messages,
+        posts,
       },
     };
-    expect(messagesSelector(mockedState)).toEqual(messages);
+    expect(messagesSelector(mockedState)).toEqual(posts);
   });
 });
 

@@ -27,10 +27,10 @@ const makeSelectError = () =>
     globalState => globalState.error,
   );
 
-const makeSelectMessages = () =>
+const makeSelectPosts = () =>
   createSelector(
     selectGlobal,
-    globalState => globalState.messages,
+    globalState => globalState.posts,
   );
 
 const makeSelectLocation = () =>
@@ -44,6 +44,6 @@ export {
   makeSelectLoading,
   makeSelectStoring,
   makeSelectError,
-  makeSelectMessages,
+  makeSelectPosts,
   makeSelectLocation,
 };
