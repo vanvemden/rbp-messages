@@ -1,9 +1,9 @@
 import {
   selectGlobal,
-  makeSelectCurrentUser,
   makeSelectLoading,
+  makeSelectStoring,
   makeSelectError,
-  makeSelectRepos,
+  makeSelectMessages,
   makeSelectLocation,
 } from '../selectors';
 
@@ -14,19 +14,6 @@ describe('selectGlobal', () => {
       global: globalState,
     };
     expect(selectGlobal(mockedState)).toEqual(globalState);
-  });
-});
-
-describe('makeSelectCurrentUser', () => {
-  const currentUserSelector = makeSelectCurrentUser();
-  it('should select the current user', () => {
-    const username = 'mxstbr';
-    const mockedState = {
-      global: {
-        currentUser: username,
-      },
-    };
-    expect(currentUserSelector(mockedState)).toEqual(username);
   });
 });
 
@@ -43,6 +30,19 @@ describe('makeSelectLoading', () => {
   });
 });
 
+describe('makeSelectStoring', () => {
+  const storingSelector = makeSelectStoring();
+  it('should select the storing', () => {
+    const storing = false;
+    const mockedState = {
+      global: {
+        storing,
+      },
+    };
+    expect(storingSelector(mockedState)).toEqual(storing);
+  });
+});
+
 describe('makeSelectError', () => {
   const errorSelector = makeSelectError();
   it('should select the error', () => {
@@ -56,18 +56,16 @@ describe('makeSelectError', () => {
   });
 });
 
-describe('makeSelectRepos', () => {
-  const reposSelector = makeSelectRepos();
-  it('should select the repos', () => {
-    const repositories = [];
+describe('makeSelectMessages', () => {
+  const messagesSelector = makeSelectMessages();
+  it('should select the messages', () => {
+    const messages = [];
     const mockedState = {
       global: {
-        userData: {
-          repositories,
-        },
+        messages,
       },
     };
-    expect(reposSelector(mockedState)).toEqual(repositories);
+    expect(messagesSelector(mockedState)).toEqual(messages);
   });
 });
 
