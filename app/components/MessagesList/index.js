@@ -7,7 +7,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import MessageListItem from 'containers/MessageListItem';
 
 function MessagesList({ loading, storing, error, messages }) {
-  if (loading) {
+  if (loading || storing) {
     return <List component={LoadingIndicator} />;
   }
 
