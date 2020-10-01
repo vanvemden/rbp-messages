@@ -1,9 +1,6 @@
 /*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
+ * Renders the HomePage
  */
-
 import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -15,46 +12,34 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  makeSelectRepos,
+  makeSelectMessages,
   makeSelectLoading,
+  makeSelectStoring,
   makeSelectError,
 } from 'containers/App/selectors';
-import H2 from 'components/H2';
-import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
-import CenteredSection from './CenteredSection';
-import Form from './Form';
-import Input from './Input';
-import Section from './Section';
-import messages from './messages';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+
+import { Jumbotron, Container, H2 } from '@bootstrap-styled/v4';
+import MessagesList from 'components/MessagesList';
+import uiText from './messages';
+import { getMessages } from '../App/actions';
 import reducer from './reducer';
 import saga from './saga';
 
 const key = 'home';
 
-export function HomePage({
-  username,
-  loading,
-  error,
-  repos,
-  onSubmitForm,
-  onChangeUsername,
-}) {
+export function HomePage({ loading, storing, error, messages, onPageLoad }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   useEffect(() => {
-    // When initial state username is not null, submit the form to load repos
-    if (username && username.trim().length > 0) onSubmitForm();
+    onPageLoad();
   }, []);
 
-  const reposListProps = {
+  const propsMessagesList = {
     loading,
+    storing,
     error,
-    repos,
+    messages,
   };
 
   return (
@@ -67,35 +52,20 @@ export function HomePage({
         />
       </Helmet>
       <div>
-        <CenteredSection>
+        <Jumbotron>
           <H2>
-            <FormattedMessage {...messages.startProjectHeader} />
+            <FormattedMessage {...uiText.startProjectHeader} />
           </H2>
           <p>
-            <FormattedMessage {...messages.startProjectMessage} />
+            <FormattedMessage {...uiText.startProjectMessage} />
           </p>
-        </CenteredSection>
-        <Section>
+        </Jumbotron>
+        <Container>
           <H2>
-            <FormattedMessage {...messages.trymeHeader} />
+            <FormattedMessage {...uiText.trymeHeader} />
           </H2>
-          <Form onSubmit={onSubmitForm}>
-            <label htmlFor="username">
-              <FormattedMessage {...messages.trymeMessage} />
-              <AtPrefix>
-                <FormattedMessage {...messages.trymeAtPrefix} />
-              </AtPrefix>
-              <Input
-                id="username"
-                type="text"
-                placeholder="mxstbr"
-                value={username}
-                onChange={onChangeUsername}
-              />
-            </label>
-          </Form>
-          <ReposList {...reposListProps} />
-        </Section>
+          <MessagesList {...propsMessagesList} />
+        </Container>
       </div>
     </article>
   );
@@ -103,27 +73,22 @@ export function HomePage({
 
 HomePage.propTypes = {
   loading: PropTypes.bool,
+  storing: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  messages: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  onPageLoad: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
+  messages: makeSelectMessages(),
   loading: makeSelectLoading(),
+  storing: makeSelectStoring(),
   error: makeSelectError(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
-    },
+    onPageLoad: () => dispatch(getMessages()),
   };
 }
 
