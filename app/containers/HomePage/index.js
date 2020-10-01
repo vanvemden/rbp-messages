@@ -79,24 +79,28 @@ HomePage.propTypes = {
   onPageLoad: PropTypes.func,
 };
 
+// object to connect Redux state to react component props
 const mapStateToProps = createStructuredSelector({
-  messages: makeSelectMessages(),
   loading: makeSelectLoading(),
   storing: makeSelectStoring(),
   error: makeSelectError(),
+  messages: makeSelectMessages(),
 });
 
+// object to connect Redux actions to React component props
 export function mapDispatchToProps(dispatch) {
   return {
     onPageLoad: () => dispatch(getMessages()),
   };
 }
-
+// connect Redux state and actions to React component props
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
 
+// pass multiple Redux store enhancers into the store
+// wrap component in memo to only re-render when props change
 export default compose(
   withConnect,
   memo,
