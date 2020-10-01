@@ -60,9 +60,10 @@ export function getMessagesError(error) {
  * - on success, postMessageSuccess(message)
  * - on error, postMessageError(error)
  */
-export function postMessage() {
+export function postMessage(message) {
   return {
     type: POST_MESSAGE,
+    message,
   };
 }
 
@@ -85,9 +86,10 @@ export function postMessageError(error) {
  * - on success, patchMessageSuccess(message)
  * - on error, patchMessageError(error)
  */
-export function patchMessage() {
+export function patchMessage(message) {
   return {
     type: PATCH_MESSAGE,
+    message,
   };
 }
 
@@ -110,9 +112,10 @@ export function patchMessageError(error) {
  * - on success, deleteMessageSuccess(id)
  * - on error, deleteMessageError(error)
  */
-export function deleteMessage() {
+export function deleteMessage(id) {
   return {
     type: DELETE_MESSAGE,
+    id,
   };
 }
 
