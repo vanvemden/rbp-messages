@@ -28,17 +28,18 @@ export const initialState = {
   loading: false,
   storing: false,
   error: false,
-  posts: false,
+  posts: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
+    let index;
     switch (action.type) {
       case GET_POSTS:
         draft.loading = true;
         draft.error = false;
-        draft.posts = false;
+        draft.posts = [];
         break;
 
       case GET_POSTS_SUCCESS:
@@ -72,9 +73,8 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case PATCH_POST_SUCCESS:
-        draft.posts.map(post =>
-          post.id === action.post.id ? action.post : post,
-        );
+        index = draft.posts.findIndex(post => post.id === action.post.id);
+        if (index !== -1) draft.posts[index] = action.post;
         draft.storing = false;
         break;
 

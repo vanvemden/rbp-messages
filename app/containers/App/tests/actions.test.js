@@ -164,7 +164,7 @@ describe('App DELETE Actions', () => {
       const fixture = 1;
       const expectedResult = {
         type: DELETE_POST_SUCCESS,
-        post: fixture,
+        id: fixture,
       };
 
       expect(deletePostSuccess(fixture)).toEqual(expectedResult);

@@ -22,9 +22,9 @@ describe('appReducer', () => {
   beforeEach(() => {
     state = {
       loading: false,
-      saving: false,
+      storing: false,
       error: false,
-      posts: false,
+      posts: [],
     };
   });
 
@@ -37,7 +37,7 @@ describe('appReducer', () => {
     const expectedResult = produce(state, draft => {
       draft.loading = true;
       draft.error = false;
-      draft.posts = false;
+      draft.posts = [];
     });
 
     expect(appReducer(state, getPosts())).toEqual(expectedResult);
@@ -77,7 +77,7 @@ describe('appReducer', () => {
       },
     ];
     const expectedResult = produce(state, draft => {
-      draft.saving = true;
+      draft.storing = true;
       draft.error = false;
     });
 
@@ -85,15 +85,13 @@ describe('appReducer', () => {
   });
 
   it('should handle the postPostSuccess action correctly', () => {
-    const fixture = [
-      {
-        id: 1,
-        text: 'Hello World!',
-      },
-    ];
+    const fixture = {
+      id: 1,
+      text: 'Hello World!',
+    };
     const expectedResult = produce(state, draft => {
-      draft.posts = fixture;
-      draft.saving = false;
+      draft.posts = [fixture];
+      draft.storing = false;
     });
 
     expect(appReducer(state, postPostSuccess(fixture))).toEqual(expectedResult);
@@ -105,35 +103,37 @@ describe('appReducer', () => {
     };
     const expectedResult = produce(state, draft => {
       draft.error = fixture;
-      draft.saving = false;
+      draft.storing = false;
     });
 
     expect(appReducer(state, postPostError(fixture))).toEqual(expectedResult);
   });
 
   it('should handle the patchPost action correctly', () => {
-    const fixture = [{ id: 1, text: 'Hello New World!' }];
+    const postFixture = [{ id: 1, text: 'Hello World!' }];
+    appReducer(state, postPost(postFixture));
+    const patchFixture = [{ id: 1, text: 'Hello New World!' }];
+
     const expectedResult = produce(state, draft => {
-      draft.saving = true;
+      draft.storing = true;
       draft.error = false;
     });
 
-    expect(appReducer(state, patchPost(fixture))).toEqual(expectedResult);
+    expect(appReducer(state, patchPost(patchFixture))).toEqual(expectedResult);
   });
 
   it('should handle the patchPostSuccess action correctly', () => {
-    const fixture = [
-      {
-        id: 1,
-        text: 'Hello New World!',
-      },
-    ];
+    // post item and get temporary state
+    const postFixture = { id: 1, text: 'Hello World!' };
+    const tempState = appReducer(state, postPostSuccess(postFixture));
+    // patch item and apply to temporary state
+    const patchFixture = { id: 1, text: 'Hello New World!' };
     const expectedResult = produce(state, draft => {
-      draft.posts = fixture;
-      draft.saving = false;
+      draft.posts = [patchFixture];
+      draft.storing = false;
     });
 
-    expect(appReducer(state, patchPostSuccess(fixture))).toEqual(
+    expect(appReducer(tempState, patchPostSuccess(patchFixture))).toEqual(
       expectedResult,
     );
   });
@@ -144,7 +144,7 @@ describe('appReducer', () => {
     };
     const expectedResult = produce(state, draft => {
       draft.error = fixture;
-      draft.saving = false;
+      draft.storing = false;
     });
 
     expect(appReducer(state, patchPostError(fixture))).toEqual(expectedResult);
@@ -153,7 +153,7 @@ describe('appReducer', () => {
   it('should handle the deletePost action correctly', () => {
     const fixture = 1;
     const expectedResult = produce(state, draft => {
-      draft.saving = true;
+      draft.storing = true;
       draft.error = false;
     });
 
@@ -163,8 +163,8 @@ describe('appReducer', () => {
   it('should handle the deletePostSuccess action correctly', () => {
     const fixture = 1;
     const expectedResult = produce(state, draft => {
-      draft.posts = false;
-      draft.saving = false;
+      draft.posts = [];
+      draft.storing = false;
     });
 
     expect(appReducer(state, deletePostSuccess(fixture))).toEqual(
@@ -178,7 +178,7 @@ describe('appReducer', () => {
     };
     const expectedResult = produce(state, draft => {
       draft.error = fixture;
-      draft.saving = false;
+      draft.storing = false;
     });
 
     expect(appReducer(state, deletePostError(fixture))).toEqual(expectedResult);

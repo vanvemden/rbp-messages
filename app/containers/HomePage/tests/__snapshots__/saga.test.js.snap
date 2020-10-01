@@ -1,55 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 1`] = `
+exports[`requestPosts Saga should call the getPostsError action if the response errors 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
-    "args": Array [],
-    "selector": [Function],
+    "action": Object {
+      "posts": Array [
+        Object {
+          "id": 1,
+          "text": "Hello World!",
+        },
+        Object {
+          "id": 2,
+          "text": "How are you?",
+        },
+      ],
+      "type": "rbp-messages/App/GET_POSTS_SUCCESS",
+    },
+    "channel": undefined,
   },
-  "type": "SELECT",
+  "type": "PUT",
 }
 `;
 
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 2`] = `
+exports[`requestPosts Saga should call the getPostsError action if the response errors 2`] = `undefined`;
+
+exports[`requestPosts Saga should dispatch the getPostsSuccess action if it requests the data successfully 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
-    "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
-    ],
-    "context": null,
-    "fn": [Function],
+    "action": Object {
+      "posts": Array [
+        Object {
+          "id": 1,
+          "text": "Hello World!",
+        },
+        Object {
+          "id": 2,
+          "text": "How are you?",
+        },
+      ],
+      "type": "rbp-messages/App/GET_POSTS_SUCCESS",
+    },
+    "channel": undefined,
   },
-  "type": "CALL",
+  "type": "PUT",
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 1`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [],
-    "selector": [Function],
-  },
-  "type": "SELECT",
-}
-`;
-
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 2`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
-    ],
-    "context": null,
-    "fn": [Function],
-  },
-  "type": "CALL",
-}
-`;
+exports[`requestPosts Saga should dispatch the getPostsSuccess action if it requests the data successfully 2`] = `undefined`;
