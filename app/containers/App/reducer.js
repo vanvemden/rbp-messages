@@ -8,37 +8,94 @@
  */
 
 import produce from 'immer';
-import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
+import {
+  GET_MESSAGES,
+  GET_MESSAGES_SUCCESS,
+  GET_MESSAGES_ERROR,
+  POST_MESSAGE,
+  POST_MESSAGE_SUCCESS,
+  POST_MESSAGE_ERROR,
+  PATCH_MESSAGE,
+  PATCH_MESSAGE_SUCCESS,
+  PATCH_MESSAGE_ERROR,
+  DELETE_MESSAGE,
+  DELETE_MESSAGE_SUCCESS,
+  DELETE_MESSAGE_ERROR,
+} from './constants';
 
 // The initial state of the App
 export const initialState = {
   loading: false,
+  storing: false,
   error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
-  },
+  messages: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOAD_REPOS:
+      case GET_MESSAGES:
         draft.loading = true;
         draft.error = false;
-        draft.userData.repositories = false;
+        draft.messages = false;
         break;
 
-      case LOAD_REPOS_SUCCESS:
-        draft.userData.repositories = action.repos;
+      case GET_MESSAGES_SUCCESS:
+        draft.messages = action.messages;
         draft.loading = false;
-        draft.currentUser = action.username;
         break;
 
-      case LOAD_REPOS_ERROR:
+      case GET_MESSAGES_ERROR:
         draft.error = action.error;
         draft.loading = false;
+        break;
+
+      case POST_MESSAGE:
+        draft.storing = true;
+        draft.error = false;
+        break;
+
+      case POST_MESSAGE_SUCCESS:
+        draft.messages.push(action.message);
+        draft.storing = false;
+        break;
+
+      case POST_MESSAGE_ERROR:
+        draft.error = action.error;
+        draft.storing = false;
+        break;
+
+      case PATCH_MESSAGE:
+        draft.storing = true;
+        draft.error = false;
+        break;
+
+      case PATCH_MESSAGE_SUCCESS:
+        draft.messages.map(msg =>
+          msg.id === action.message.id ? action.message : msg,
+        );
+        draft.storing = false;
+        break;
+
+      case PATCH_MESSAGE_ERROR:
+        draft.error = action.error;
+        draft.storing = false;
+        break;
+
+      case DELETE_MESSAGE:
+        draft.storing = true;
+        draft.error = false;
+        break;
+
+      case DELETE_MESSAGE_SUCCESS:
+        draft.messages.filter(msg => msg.id !== action.id);
+        draft.storing = false;
+        break;
+
+      case DELETE_MESSAGE_ERROR:
+        draft.error = action.error;
+        draft.storing = false;
         break;
     }
   });
