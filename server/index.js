@@ -12,10 +12,15 @@ const ngrok =
     ? require('ngrok')
     : false;
 const { resolve } = require('path');
+
+const postsRoutes = require('./routes/posts');
+
 const app = express();
 
-// If you need a backend, e.g. an API, add your custom backend-specific middleware here
-const postsRoutes = require('./routes/posts');
+// allow json body parsing
+app.use(express.json());
+
+// routes
 app.use('/posts', postsRoutes);
 
 // In production we need to pass these values in instead of relying on webpack
