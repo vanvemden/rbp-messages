@@ -13,10 +13,6 @@ export const GET_POSTS = 'rbp-messages/App/GET_POSTS';
 export const GET_POSTS_SUCCESS = 'rbp-messages/App/GET_POSTS_SUCCESS';
 export const GET_POSTS_ERROR = 'rbp-messages/App/GET_POSTS_ERROR';
 
-export const POST_POST = 'rbp-messages/App/POST_POST';
-export const POST_POST_SUCCESS = 'rbp-messages/App/POST_POST_SUCCESS';
-export const POST_POST_ERROR = 'rbp-messages/App/POST_POST_ERROR';
-
 export const PATCH_POST = 'rbp-messages/App/PATCH_POST';
 export const PATCH_POST_SUCCESS = 'rbp-messages/App/PATCH_POST_SUCCESS';
 export const PATCH_POST_ERROR = 'rbp-messages/App/PATCH_POST_ERROR';
