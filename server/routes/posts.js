@@ -1,11 +1,11 @@
 const express = require('express');
-const PostModel = require('../models/PostModel');
+const Post = require('../models/Post');
 
 const router = new express.Router();
 
 router.get('/', async function getAllPosts(req, res, next) {
   try {
-    const posts = await PostModel.getAll();
+    const posts = await Post.getAll();
     return res.json({ posts });
   } catch (err) {
     return next(err);
@@ -14,7 +14,7 @@ router.get('/', async function getAllPosts(req, res, next) {
 
 router.post('/', async function createPost(req, res, next) {
   try {
-    const post = await PostModel.create(req.body.text);
+    const post = await Post.create(req.body);
     return res.status(201).json({ post });
   } catch (err) {
     return next(err);
